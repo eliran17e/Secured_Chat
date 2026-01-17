@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Room Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <div class="shell">
+    <div class="header">
+      <h1 id="room-title">Room</h1>
+      <button id="back-btn">← Back to Rooms</button>
+    </div>
+
+    <div class="layout">
+      <!-- Chat -->
+      <div class="card chat">
+        <div id="history" class="history"></div>
+        <div class="loading hidden"></div>
+        <div class="composer">
+          <input id="msg-input" placeholder="Write a message…" />
+          <button id="send-btn">Send</button>
+        </div>
+      </div>
+
+      <!-- Members -->
+      <div class="card members">
+        <h2 id="membersHeader">Members</h2>
+        <div id="members" class="members-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>
