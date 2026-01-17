@@ -14,7 +14,7 @@ const config = {
 
   // Database Configuration
   database: {
-    mongoUri: process.env.MONGO_URI || 'mongodb://localhost:27017/chatapp',
+    mongoUri: process.env.MONGO_URI,
     options: {
       // Add any mongoose connection options here
     }
@@ -31,10 +31,10 @@ const config = {
   security: {
     // URL Risk Score Configuration
     urlRiskThreshold: parseInt(process.env.URL_RISK_THRESHOLD) || 70,
-    
+
     // Request timeout for URL checking (in milliseconds)
     urlCheckTimeout: parseInt(process.env.URL_CHECK_TIMEOUT) || 1500,
-    
+
     // Maximum URLs to check per message
     maxUrlsPerMessage: parseInt(process.env.MAX_URLS_PER_MESSAGE) || 5,
 
@@ -61,12 +61,12 @@ const config = {
       apiKey: process.env.GEMINI_API_KEY,
       model: process.env.GEMINI_MODEL || 'gemini-1.5-flash'
     },
-    
+
     // VirusTotal for URL checking (optional)
     virustotal: {
       apiKey: process.env.VT_API_KEY // Optional
     },
-    
+
     // URLHaus for malware URL checking (free, no key required)
     urlhaus: {
       apiUrl: process.env.URLHAUS_API || 'https://urlhaus.abuse.ch/api/v1/url/',
@@ -78,7 +78,7 @@ const config = {
   chat: {
     // Maximum message length
     maxMessageLength: parseInt(process.env.MAX_MESSAGE_LENGTH) || 1000,
-    
+
     // Rate limiting (messages per minute per user)
     rateLimit: {
       enabled: process.env.RATE_LIMIT_ENABLED !== 'false',
@@ -96,7 +96,7 @@ const config = {
 
   // Development/Production Configuration
   environment: process.env.NODE_ENV || 'development',
-  
+
   // Feature Flags
   features: {
     userRegistration: process.env.FEATURE_USER_REGISTRATION !== 'false',
@@ -126,7 +126,7 @@ function validateConfig() {
   if (errors.length > 0) {
     console.error('Configuration validation errors:');
     errors.forEach(error => console.error(`  - ${error}`));
-    
+
     if (config.environment === 'production') {
       process.exit(1);
     } else {

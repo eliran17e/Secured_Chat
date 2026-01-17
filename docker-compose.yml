@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: secured_chat_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: secured_chat_backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: secured_chat_frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

@@ -83,7 +83,7 @@
 
     if (res.status === 401) {
       clearAuth();
-      window.location.href = '/pages/index.html';
+      window.location.href = '/index.html';
       throw new Error('Unauthorized');
     }
 

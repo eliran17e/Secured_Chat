@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
       Auth.clearAuth();               // clears token + user:contentReference[oaicite:2]{index=2}
-      window.location.href = "/pages/index.html"; // go back to login page
+      window.location.href = "/index.html"; // go back to login page
     });
   }
   // Initial load
