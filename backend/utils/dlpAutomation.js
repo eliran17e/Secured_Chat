@@ -148,7 +148,7 @@ function prefilterMessage(message, matchesThreshold = 1) {
 
     // Strict allow: only if all meaningful tokens are in the good whitelist and no sensitive matches
     const allGood = significant.length > 0 && significant.every(t => goods.has(t));
-    if (allGood && matches.length === 0) return { action: 'allow', matches };
+    if ((allGood && matches.length === 0) || significant.length === 0) return { action: 'allow', matches };
 
     if (matches.length >= matchesThreshold) return { action: 'block', matches };
 
@@ -157,5 +157,4 @@ function prefilterMessage(message, matchesThreshold = 1) {
 }
 
 module.exports = { prefilterMessage, ensureSensitiveTermsLoaded };
-
 

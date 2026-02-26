@@ -5,6 +5,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const authRoutes = require("./routes/authRoutes");
 const roomsRouter = require("./routes/roomsRouter");
+const adminRoutes = require("./routes/adminRoutes");
 const chatSocket = require("./sockets/chatSocket");
 const { createRecipeEmbeddings } = require("./utils/create_recipe_embeddings");
 const connectDB = require("./db");
@@ -30,6 +31,7 @@ app.use(cors({
 // Routes
 app.use("/auth", authRoutes);
 app.use("/rooms", roomsRouter);
+app.use("/admin", adminRoutes);
 
 // --- Authenticate sockets ---
 io.use((socket, next) => {

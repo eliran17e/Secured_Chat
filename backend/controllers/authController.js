@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
     }
 
     // Create JWT token
-    const payload = { id: user._id, name: user.name };
+    const payload = { id: user._id, name: user.name, role: user.role };
     const token = jwt.sign(payload, config.auth.jwtSecret, {
       expiresIn: config.auth.jwtExpiration,
     });

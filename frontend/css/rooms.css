@@ -1,0 +1,491 @@
+/* Modern styling for the rooms page */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+}
+
+.wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2.5rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 0.6s ease;
+}
+
+h1 {
+    margin: 0 0 1rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #f093fb, #f5576c, #4facfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: #2d3748;
+}
+
+#role-line {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #4a5568;
+    background: linear-gradient(135deg, #edf2f7, #e2e8f0);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid #e2e8f0;
+}
+
+#role-text {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+    margin: 2rem 0;
+}
+
+#create-room-section {
+    background: linear-gradient(135deg, #fef5e7, #fed7aa);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid #fbb040;
+    margin-bottom: 1rem;
+}
+
+#create-room-section h2 {
+    color: #9c4221;
+    margin-bottom: 1rem;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+select, input[type="text"] {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: #fff;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+select:focus, input[type="text"]:focus {
+    outline: none;
+    border-color: #f093fb;
+    box-shadow: 0 0 0 3px rgba(240, 147, 251, 0.1);
+    transform: translateY(-2px);
+}
+
+button {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button.primary {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: #fff;
+}
+
+button.secondary {
+    background: linear-gradient(135deg, #edf2f7, #e2e8f0);
+    color: #4a5568;
+    border: 1px solid #cbd5e0;
+}
+
+button.secondary:hover {
+    background: linear-gradient(135deg, #e2e8f0, #cbd5e0);
+}
+
+button.danger {
+    background: linear-gradient(135deg, #fed7d7, #feb2b2);
+    color: #c53030;
+    border: 1px solid #fc8181;
+}
+
+button.danger:hover {
+    background: linear-gradient(135deg, #feb2b2, #fc8181);
+    color: #fff;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.status {
+    margin-top: 1rem;
+    color: #4a5568;
+    min-height: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: #f7fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.hint {
+    color: #718096;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.loading {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .wrap {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .row {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .controls {
+        justify-content: center;
+    }
+    
+    button {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+    
+    .wrap {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .controls {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .controls button {
+        width: 100%;
+    }
+}
+
+/* Success/Error states */
+.status.success {
+    background: #f0fff4;
+    color: #22543d;
+    border-color: #68d391;
+}
+
+.status.error {
+    background: #fed7d7;
+    color: #742a2a;
+    border-color: #fc8181;
+}
+
+/* Loading state for select */
+select option:first-child {
+    color: #a0aec0;
+}
+
+/* Enhanced hover effects */
+.wrap:hover {
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+}
+
+/* Room selection highlight */
+select:hover {
+    border-color: #cbd5e0;
+}
+
+/* Better spacing for create room section */
+#create-room-section .hint {
+    margin-top: 0.75rem;
+    color: #a0522d;
+}
+
+/* Admin Configuration Styles */
+#admin-config-section {
+    background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid #38b2ac;
+    margin-bottom: 1rem;
+}
+
+#admin-config-section h2 {
+    color: #234e52;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.config-group {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    border: 1px solid #bee3f8;
+}
+
+.config-group label {
+    display: block;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+}
+
+.config-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.config-row input[type="number"] {
+    width: 120px;
+    padding: 0.5rem 0.75rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    background: #fff;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.config-row input[type="number"]:focus {
+    outline: none;
+    border-color: #38b2ac;
+    box-shadow: 0 0 0 3px rgba(56, 178, 172, 0.1);
+}
+
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0 !important;
+    cursor: pointer;
+    font-weight: 500 !important;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.current-value {
+    font-size: 0.875rem;
+    color: #4a5568;
+    background: #f7fafc;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    font-weight: 500;
+}
+
+.stats-display {
+    font-size: 0.875rem;
+    color: #4a5568;
+    background: #f7fafc;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    font-weight: 500;
+    min-width: 200px;
+}
+
+.dlp-advanced {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    border: 1px dashed #cbd5e0;
+}
+
+.dlp-advanced .config-row {
+    margin-bottom: 0.75rem;
+}
+
+.dlp-advanced label {
+    min-width: 100px;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+}
+
+.hint-inline {
+    font-size: 0.75rem;
+    color: #718096;
+    font-style: italic;
+    margin-left: 0.5rem;
+}
+
+/* Admin button styles */
+.config-row button {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-width: 80px;
+}
+
+/* Success/warning indicators for config updates */
+.config-group.updated {
+    border-color: #68d391;
+    background: linear-gradient(135deg, #f0fff4, #c6f6d5);
+    animation: configUpdate 0.5s ease;
+}
+
+@keyframes configUpdate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive adjustments for admin config */
+@media (max-width: 768px) {
+    .config-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+    
+    .config-row input[type="number"] {
+        width: 100%;
+    }
+    
+    .stats-display {
+        min-width: auto;
+        text-align: center;
+    }
+    
+    .current-value {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #admin-config-section {
+        padding: 1rem;
+    }
+    
+    .config-group {
+        padding: 0.75rem;
+    }
+    
+    .dlp-advanced {
+        padding: 0.75rem;
+    }
+}

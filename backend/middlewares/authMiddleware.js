@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const config = require("../config/config");
 
 const verifyJWT = (req, res, next) => {
   try {
@@ -12,7 +13,7 @@ const verifyJWT = (req, res, next) => {
     const token = authHeader.split(" ")[1];
 
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, config.auth.jwtSecret);
 
     // Attach user info to request object
     req.user = decoded;

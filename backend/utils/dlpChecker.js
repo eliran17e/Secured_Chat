@@ -13,7 +13,9 @@ function cosineSimilarity(vecA, vecB) {
     return dotProduct / (Math.sqrt(normA) * Math.sqrt(normB));
 }
 
-exports.hasLeak = async (message, threshold=0.4) => {
+exports.hasLeak = async (message, threshold = null) => {
+    // Use provided threshold or default from config
+    const actualThreshold = threshold !== null ? threshold : config.security.dlp.threshold;
     try {
         // Load recipe embeddings from JSON file
         const recipeEmbeddings = JSON.parse(fs.readFileSync('recipeEmbeddings.json', 'utf8'));
@@ -29,7 +31,7 @@ exports.hasLeak = async (message, threshold=0.4) => {
         // Compare message embedding to each recipe embedding
         for (const recipe of recipeEmbeddings) {
             const similarity = cosineSimilarity(messageEmbedding, recipe.embedding);
-            if (similarity > threshold) {
+            if (similarity > actualThreshold) {
                 return true; // Potential leak detected
             }
         }
