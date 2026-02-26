@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await postJson('/auth/register', { name, password });
       alert('Registration successful! Redirecting to login page...');
-      window.location.href = "/index.html";
+      window.location.href = '/'; // Redirect to login page
     } catch (err) {
       alert(`Registration failed: ${err.message}`);
     } finally {

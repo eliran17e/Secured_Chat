@@ -2,7 +2,7 @@
 
 (function () {
   const TOKEN_KEY = 'auth_token';
-  const USER_KEY = 'auth_user'; // we'll store the server-returned user object here
+  const USER_KEY  = 'auth_user'; // we'll store the server-returned user object here
 
   function setToken(token) {
     if (token) localStorage.setItem(TOKEN_KEY, token);
@@ -83,7 +83,7 @@
 
     if (res.status === 401) {
       clearAuth();
-      window.location.href = '/index.html';
+      window.location.href = 'index.html';
       throw new Error('Unauthorized');
     }
 

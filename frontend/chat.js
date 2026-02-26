@@ -6,7 +6,7 @@ function qs(name, def = '') {
 }
 
 function escapeHTML(s = '') {
-  return s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c]));
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#039;'}[c]));
 }
 
 function fmtTime() {
@@ -16,27 +16,24 @@ function fmtTime() {
 document.addEventListener('DOMContentLoaded', async () => {
   if (!Auth.requireAuthOrRedirect('index.html')) return;
 
-  // 1. Try to get ID from URL, otherwise get it from Session Storage
-  const urlParams = new URLSearchParams(window.location.search);
-  const roomId = urlParams.get('id') || sessionStorage.getItem('currentRoomId');
-  const roomName = urlParams.get('name') || sessionStorage.getItem('currentRoomName') || 'Room';
-
+  const roomId = qs('id');
+  const roomName = qs('name') || 'Room';
   if (!roomId) {
-    alert('Missing room id. Returning to lobby.');
-    window.location.href = '/pages/rooms.html';
+    alert('Missing room id');
+    window.location.href = 'rooms.html';
     return;
   }
 
   const historyEl = document.getElementById('history');
   const membersEl = document.getElementById('members');
-  const msgInput = document.getElementById('msg-input');
-  const sendBtn = document.getElementById('send-btn');
-  const backBtn = document.getElementById('back-btn');
+  const msgInput  = document.getElementById('msg-input');
+  const sendBtn   = document.getElementById('send-btn');
+  const backBtn   = document.getElementById('back-btn');
   const membersHeader = document.getElementById('membersHeader');
   const loadingEl = document.querySelector('.loading');
   document.getElementById('room-title').textContent = roomName;
 
-  backBtn.addEventListener('click', () => window.location.href = '/pages/rooms.html');
+  backBtn.addEventListener('click', () => window.location.href = 'rooms.html');
 
   // Connect to socket.io server
   const token = Auth.getToken();
@@ -44,7 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   socket.on("connect", () => {
     addSystemMessage("✅ Connected to server");
-    console.log("Joining room with ID:", roomId);
     socket.emit("joinRoom", roomId); // join immediately
   });
 

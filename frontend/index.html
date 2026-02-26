@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Messenger</title>
     <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
     <div class="main-container">
         <h1>My Messenger</h1>
@@ -16,19 +14,17 @@
         <div class="form-container">
             <form id="login-form">
                 <input type="text" placeholder="Enter Username" id="login-id" name="id" autocomplete="username" />
-                <input type="password" placeholder="Enter Password" id="login-password" name="password"
-                    autocomplete="current-password" />
+                <input type="password" placeholder="Enter Password" id="login-password" name="password" autocomplete="current-password" />
                 <button id="login-button" type="submit">Login</button>
             </form>
         </div>
-
+        
         <div class="register-link">
             <p>Don't have an account?</p>
-            <a href="/pages/register.html">Create one here</a>
+            <a href="register.html">Create one here</a>
         </div>
     </div>
-    <script src="../js/auth.js"></script>
-    <script src="../js/index.js"></script>
+    <script src="auth.js"></script>
+    <script src="index.js"></script>
 </body>
-
 </html>

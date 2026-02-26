@@ -17,7 +17,7 @@ async function postJson(path, payload) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('login-form');
-  const btn = document.getElementById('login-button');
+  const btn  = document.getElementById('login-button');
   const nameEl = document.getElementById('login-id'); // Updated to reflect 'name' instead of 'id'
   const pwEl = document.getElementById('login-password');
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       // Expecting server to return: { token, id }
       const result = await postJson('/auth/login', { name, password });
-
+    
       if (result?.token) {
         Auth.setToken(result.token); // Save the token
       }
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       localStorage.setItem("token", result.token);
-      window.location.href = "/pages/rooms.html";
+      window.location.href = 'rooms.html';
     } catch (err) {
       alert(`Login failed: ${err.message}`);
     } finally {

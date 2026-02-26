@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rooms</title>
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="rooms.css">
+</head>
+<body>
+  <div class="wrap">
+    <h1>Rooms</h1>
+    <div id="role-line" class="p hint">Role: <span id="role-text">…</span></div>
+
+    <div class="divider"></div>
+
+    <!-- Create Room (admins only) -->
+    <div id="create-room-section" style="display:none;">
+      <h2 style="font-size:18px; margin:0 0 8px;">Create a new room</h2>
+      <div class="row">
+        <input id="new-room-name" type="text" placeholder="Room name" />
+        <button class="primary" id="create-room-btn">Create Room</button>
+      </div>
+      <p class="hint">Only admins can create rooms.</p>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Admin Configuration (admins only) -->
+    <div id="admin-config-section" style="display:none;">
+      <h2 style="font-size:18px; margin:0 0 8px;">🛡️ Security Configuration</h2>
+      
+      <!-- URL Risk Threshold -->
+      <div class="config-group">
+        <label for="url-threshold">URL Risk Threshold (0-100):</label>
+        <div class="config-row">
+          <input type="number" id="url-threshold" min="0" max="100" placeholder="70" />
+          <span class="current-value">Current: <span id="current-url-threshold">70</span></span>
+          <button class="secondary" id="update-url-threshold-btn">Update</button>
+        </div>
+        <p class="hint">URLs with risk scores above this threshold will be blocked.</p>
+      </div>
+
+      <!-- DLP Configuration -->
+      <div class="config-group">
+        <label>Data Leak Prevention (DLP):</label>
+        <div class="config-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="dlp-enabled" />
+            <span>Enable DLP Protection</span>
+          </label>
+          <button class="secondary" id="update-dlp-btn">Update DLP</button>
+        </div>
+        <div class="dlp-advanced" style="display:none;">
+          <div class="config-row">
+            <label for="dlp-threshold">Similarity Threshold (0.0-1.0):</label>
+            <input type="number" id="dlp-threshold" min="0.0" max="1.0" step="0.1" placeholder="0.4" />
+            <span class="hint-inline">Higher = more sensitive (detects more)</span>
+          </div>
+        </div>
+        <p class="hint">Controls protection against sharing of confidential recipe information.</p>
+      </div>
+
+      <!-- Blocked URLs Management -->
+      <div class="config-group">
+        <label>Blocked URLs:</label>
+        <div class="config-row">
+          <span class="stats-display">
+            Total: <span id="blocked-urls-count">0</span> | 
+            Blocks: <span id="total-blocks">0</span>
+          </span>
+          <button class="secondary" id="view-blocked-urls-btn">View Details</button>
+        </div>
+        <p class="hint">View and manage URLs that have been automatically blocked.</p>
+      </div>
+
+      <div class="divider"></div>
+    </div>
+
+    <!-- Select & Join/Delete -->
+    <h2 style="font-size:18px; margin:0 0 8px;">Available rooms</h2>
+    <div class="row">
+      <select id="rooms-select" aria-label="Available rooms">
+        <option value="" disabled selected>Loading…</option>
+      </select>
+      <div class="controls">
+        <button class="secondary" id="refresh-btn" title="Refresh list">Refresh</button>
+      </div>
+    </div>
+
+    <div class="controls" style="margin-top:12px;">
+      <button class="primary" id="join-room-btn" disabled>Join room</button>
+      <button class="danger" id="delete-room-btn" disabled>Delete room</button>
+    </div>
+    <div class="controls" style="margin-top:20px;">
+      <button class="secondary" id="logout-btn">Logout</button>
+    </div>
+    <div class="status" id="status"></div>
+  </div>
+
+<script src="auth.js"></script>
+<script src="rooms.js"></script>
+</body>
+</html>
