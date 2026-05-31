@@ -51,21 +51,22 @@ module.exports = (io) => {
         return;
       }
 
-      // check for secret recipes data leak
-
-      // prefilter: avoid unnecessary AI calls
-      const { action, matches } = prefilterMessage(message);
-      if (action === 'block') {
-        console.log(`Blocked by prefilter (${matches.join(', ')}) from ${socket.user.name} in room ${roomId}`);
-        socket.emit("systemMessage", "Message contains restricted content");
-        return;
-      }
-      if (action === 'check') {
-        const leaking = await hasLeak(message);
-        if (leaking) {
-          console.log(`Blocked leaking message from ${socket.user.name} in room ${roomId}`);
+      // check for secret recipes data leak (only if DLP is enabled)
+      if (config.security.dlp.enabled) {
+        // prefilter: avoid unnecessary AI calls
+        const { action, matches } = prefilterMessage(message);
+        if (action === 'block') {
+          console.log(`Blocked by prefilter (${matches.join(', ')}) from ${socket.user.name} in room ${roomId}`);
           socket.emit("systemMessage", "Message contains restricted content");
           return;
+        }
+        if (action === 'check') {
+          const leaking = await hasLeak(message);
+          if (leaking) {
+            console.log(`Blocked leaking message from ${socket.user.name} in room ${roomId}`);
+            socket.emit("systemMessage", "Message contains restricted content");
+            return;
+          }
         }
       }
 

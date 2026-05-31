@@ -8,6 +8,7 @@ const roomsRouter = require("./routes/roomsRouter");
 const adminRoutes = require("./routes/adminRoutes");
 const chatSocket = require("./sockets/chatSocket");
 const { createRecipeEmbeddings } = require("./utils/create_recipe_embeddings");
+const { seedRecipes } = require("./utils/seedRecipes");
 const connectDB = require("./db");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
@@ -54,6 +55,7 @@ chatSocket(io);
 const startServer = async () => {
   try {
     await connectDB();
+    await seedRecipes();
     await createRecipeEmbeddings();
     server.listen(config.server.port, config.server.host, () => {
       console.log(`Server is running at http://${config.server.host}:${config.server.port}`);

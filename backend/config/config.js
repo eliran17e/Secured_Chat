@@ -51,7 +51,7 @@ const config = {
       enabled: process.env.DLP_ENABLED !== 'false', // Default to true unless explicitly disabled
       maxRetries: parseInt(process.env.DLP_MAX_RETRIES) || 5,
       baseDelay: parseInt(process.env.DLP_BASE_DELAY) || 1000, // milliseconds
-      threshold: parseFloat(process.env.DLP_THRESHOLD) || 0.4 // Similarity threshold (0.0-1.0)
+      threshold: parseFloat(process.env.DLP_THRESHOLD) || 0.7 // Similarity threshold (0.0-1.0) - tuned for gemini-embedding-001
     }
   },
 

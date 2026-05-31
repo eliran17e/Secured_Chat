@@ -42,3 +42,8 @@ __pycache__/
 # ===============================
 dist/
 build/
+
+# ===============================
+# Generated DLP embeddings (regenerated on server boot from data/secretRecipes.json)
+# ===============================
+backend/recipeEmbeddings.json

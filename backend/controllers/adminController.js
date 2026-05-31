@@ -36,18 +36,19 @@ exports.getConfig = async (req, res) => {
   }
 };
 
-// Update environment variable in .env file
+// Update environment variable in .env file (best-effort: in Docker, .env may not be in the container)
 function updateEnvVariable(key, value) {
   const envPath = path.join(__dirname, '../.env');
-  
+
   if (!fs.existsSync(envPath)) {
-    throw new Error('.env file not found');
+    console.warn(`Skipping persistent update of ${key}: .env not found at ${envPath}. In-memory change still applies for this session.`);
+    return;
   }
-  
+
   let envContent = fs.readFileSync(envPath, 'utf8');
   const lines = envContent.split('\n');
   let updated = false;
-  
+
   // Update existing line or add new one
   const updatedLines = lines.map(line => {
     if (line.startsWith(`${key}=`)) {
@@ -56,7 +57,7 @@ function updateEnvVariable(key, value) {
     }
     return line;
   });
-  
+
   if (!updated) {
     updatedLines.push(`${key}=${value}`);
   }
