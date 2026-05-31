@@ -4,8 +4,8 @@ services:
   mongo:
     image: mongo:7
     container_name: secured_chat_mongo
-    ports:
-      - "27017:27017"
+    # No published port: backend reaches Mongo over the internal docker network at mongo:27017.
+    # Use `docker exec -it secured_chat_mongo mongosh` for admin access.
     volumes:
       - mongo_data:/data/db
 
